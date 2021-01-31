@@ -1,5 +1,6 @@
 import React from 'react';
 import './Routes.css';
+
 // import {
 //   BrowserRouter as Router,
 //   Switch,
@@ -10,9 +11,7 @@ import './Routes.css';
 function Routes() {
   return (
     <div className="App">
-      <header className="App-header">
-        Apples
-      </header>
+      <header className="App-header">Apples</header>
     </div>
   );
 }
