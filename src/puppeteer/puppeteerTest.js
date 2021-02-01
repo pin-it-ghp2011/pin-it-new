@@ -1,3 +1,6 @@
+
+//Sample puppeteer functions
+
 const puppeteer = require('puppeteer');
 //Gets the title
 (async () => {
@@ -36,7 +39,7 @@ const puppeteer = require('puppeteer');
   await page.goto(
     'https://www.nytimes.com/2021/01/30/us/politics/trump-right-wing-domestic-terrorism.html?action=click&module=Spotlight&pgtype=Homepage'
   );
-  await page.screenshot({ path: 'screenshots/page.png' });
+  await page.screenshot({ path: '../public/page.png' });
 
   await browser.close();
 })();
