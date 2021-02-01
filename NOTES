@@ -6,4 +6,13 @@ $ firebase login
 $ firebase init
 $ firebase deploy
 
+
 npm install react-router-dom
+
+
+npm install react-bootstrap
+npm install react-redux
+npm install prop-types
+npm install redux redux-logger redux-thunk
+npm install axios
+npm install bootstrap
