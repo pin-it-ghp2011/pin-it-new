@@ -1,63 +1,50 @@
-
-//Sample puppeteer functions
-
 const puppeteer = require('puppeteer');
-//Gets the title
-(async () => {
+
+//UNCOMMENT FUNCTION CALLS TO USE
+const url = 'https://en.wikipedia.org/wiki/Groundhog_Day';
+//GET TITLE OG PAGE
+async function getTitle() {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
-  await page.goto(
-    'https://www.nytimes.com/2021/01/30/us/politics/trump-right-wing-domestic-terrorism.html?action=click&module=Spotlight&pgtype=Homepage'
-  );
-  let text = await page.title();
+  await page.goto('https://en.wikipedia.org/wiki/Groundhog_Day');
+  let title = await page.title();
   await browser.close();
-  console.log(text);
-})();
+  console.log(title);
+}
+//getTitle();
 
-//get article summary
-(async () => {
+//GET CONTENT OF ENTIRE PAGE
+const wholePage = async () => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
-  await page.goto(
-    'https://www.nytimes.com/2021/01/30/us/politics/trump-right-wing-domestic-terrorism.html?action=click&module=Spotlight&pgtype=Homepage'
-  );
-  //pass in id of element you want and what to do/get from it
-  //$eval=>gets single or first element that matches
-  //$$eval=> gets all that match (in array? to map into list)
-  const summary = await page.$eval(
-    '#article-summary',
-    (element) => element.textContent
-  );
-  console.log(summary);
+  await page.goto(url, { waitUntil: 'networkidle2' });
+  const fullPage = await page.content();
+  console.log(fullPage);
   await browser.close();
-})();
+};
+//wholePage();
 
-//get a screenshot
-(async () => {
+//GET HTML ONLY FOR PAGE
+const getPage = async () => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
-  await page.goto(
-    'https://www.nytimes.com/2021/01/30/us/politics/trump-right-wing-domestic-terrorism.html?action=click&module=Spotlight&pgtype=Homepage'
-  );
-  await page.screenshot({ path: '../public/page.png' });
-
+  await page.goto('https://en.wikipedia.org/wiki/Groundhog_Day');
+  await page.waitForSelector('body');
+  const bodyHTML = await page.evaluate(() => document.body.innerHTML);
+  console.log(bodyHTML);
   await browser.close();
-})();
+};
 
-//getting  all p tags
-// (async () => {
-// 	const browser = await puppeteer.launch();
-// 	const page = await browser.newPage();
-// 	await page.goto(
-// 		'https://www.nytimes.com/2021/01/30/us/politics/trump-right-wing-domestic-terrorism.html?action=click&module=Spotlight&pgtype=Homepage'
-// 	);
-// 	//pass in id of element you want and what to do/get from it
+// getPage();
 
-// 	//$eval=>gets single or first element that matches
-// 	//$$eval=> gets all that match (in array? to map into list)
-// 	const text = await page.$$('p');
-// 	for (let i = 0; i < text.length; ++i) {
-// 		const elem = text[i];
-// 		const allText = await page.evaluate((elem) => elem.textContent, elem);
-// 		console.log(allText);
-// 	}
+//GET SCREENSHOT
+const pageScreen = async () => {
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage();
+  await page.goto('https://en.wikipedia.org/wiki/Groundhog_Day');
+  const screenshot = await page.screenshot({
+    path: 'screenshots/wikiground.png',
+  });
+  await browser.close();
+};
+// pageScreen();
