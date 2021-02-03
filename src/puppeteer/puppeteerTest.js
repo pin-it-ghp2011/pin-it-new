@@ -11,7 +11,6 @@ export async function newArticle() {
   let title = await page.title();
   await page.waitForSelector('body');
   const body = await page.evaluate(() => document.body.innerHTML);
-
   await browser.close();
 }
 
