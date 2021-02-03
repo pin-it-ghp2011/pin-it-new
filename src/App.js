@@ -9,8 +9,10 @@ function App() {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const ref = firebase.firestore().collection('Articles');
-  console.log('should be articles: ', ref);
+
+  const ref = firebase.firestore().collection("articles");
+  console.log("should be articles: ", ref);
+
 
   //ONE TIME GET FUNCTION
   function getArticles() {
@@ -35,11 +37,11 @@ function App() {
   return (
     <div className="App">
       <div>
-        <h1>Articles</h1>
+        <h1>articles</h1>
         {articles.map((article) => (
           <div key={article.id}>
             <h2>{article.title}</h2>
-            <p>{article.summary}</p>
+            <p>{article.body}</p>
             <h4>{article.url}</h4>
           </div>
         ))}
