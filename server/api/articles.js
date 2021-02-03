@@ -5,9 +5,11 @@ const { db, articlesCollection, webAPI } = require("../index");
 
 // we need to consider user here
 router.post("/", async (req, res, next) => {
+
   try {
+    console.log("EXPECTED BODY: ",req.body)
     const articles = {
-      summary: req.body["body"],
+      body: req.body["body"],
       title: req.body["title"],
       url: req.body["url"],
     };
