@@ -1,14 +1,15 @@
 import puppeteer from 'puppeteer';
-import { db } from '../../server/index';
+//import { db } from '../../server/index';
 
 const puppeteerArticle = async (url) => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
   await page.goto(url, { waitUntil: 'networkidle2' });
-  let title = await page.title();
+  let title = await (await page.title()).toString();
   await page.waitForSelector('body');
-  const rawBody = await page.evaluate(() => document.body.innerHTML);
-  const body = rawBody.toString();
+  const body = await (
+    await page.evaluate(() => document.body.innerHTML)
+  ).toString();
   await browser.close();
   const articleObj = {
     title: title,
@@ -37,6 +38,7 @@ export const newArticle = (url) => {
     }
   };
 };
+
 export default function articlesReducer(state = [], action) {
   //console.log('project reducer', action.projectId);
   switch (action.type) {
