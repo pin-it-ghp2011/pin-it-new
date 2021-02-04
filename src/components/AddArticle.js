@@ -1,27 +1,37 @@
-import React from 'react';
+import React from "react";
+import axios from "axios";
 
 class AddArticle extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      url: '',
+      url: "",
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
   handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value,
     });
   }
-  handleSubmit(event) {
+
+  async handleSubmit(event) {
     event.preventDefault();
+
     const url = this.state.url;
-    console.log('in add article component-url:', url);
+    console.log("in add article component-url:", url);
     // DB CALL GOES HERE?
-    this.setState({
-      url: '',
-    });
+    try {
+      await axios.post("./api/articles", url);
+
+      this.setState({
+        url: "",
+      });
+    } catch (err) {
+      console.log(err);
+    }
   }
   render() {
     return (
@@ -32,7 +42,7 @@ class AddArticle extends React.Component {
             <input
               type="text"
               name="url"
-              value={this.state.name}
+              value={this.state.url}
               onChange={this.handleChange}
               required
             />

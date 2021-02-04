@@ -1,25 +1,39 @@
 import React, { useState, useEffect } from "react";
-import firebase from "./firebaseConfig";
+import firebase from "../firebaseConfig";
+import axios from "axios";
 
 function AllArticles() {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const ref = firebase.firestore().collection("articles");
-  console.log("should be articles: ", ref);
+  // const ref = firebase.firestore().collection("articles");
+  // console.log("should be articles: ", ref);
 
-  //ONE TIME GET FUNCTION
-  function getArticles() {
-    setLoading(true);
-    ref.onSnapshot((querySnapshot) => {
-      const articles = [];
-      querySnapshot.forEach((doc) => {
-        articles.push(doc.data());
-      });
+  async function getArticles() {
+    try {
+      let articles = [];
+      console.log("getArticles func get called");
+      articles = await axios.get("./api/v1/articles");
+      console.log("getArticles func after axios");
       setArticles(articles);
       setLoading(false);
-    });
+    } catch (err) {
+      console.log(err);
+    }
   }
+
+  //ONE TIME GET FUNCTION
+  // function getArticles() {
+  //   setLoading(true);
+  //   ref.onSnapshot((querySnapshot) => {
+  //     const articles = [];
+  //     querySnapshot.forEach((doc) => {
+  //       articles.push(doc.data());
+  //     });
+  //     setArticles(articles);
+  //     setLoading(false);
+  //   });
+  // }
   useEffect(() => {
     getArticles();
     // eslint-disable-next-line
