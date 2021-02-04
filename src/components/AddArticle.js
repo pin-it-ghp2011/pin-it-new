@@ -17,7 +17,7 @@ class AddArticle extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     const url = this.state.url;
-    // DB CALL GOES HERE?
+
     console.log('in add article component-url:', url);
     this.setState({
       url: '',
