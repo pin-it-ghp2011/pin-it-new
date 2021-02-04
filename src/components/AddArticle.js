@@ -17,8 +17,8 @@ class AddArticle extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     const url = this.state.url;
-    console.log('in add article component-url:', url);
     // DB CALL GOES HERE?
+    console.log('in add article component-url:', url);
     this.setState({
       url: '',
     });
@@ -32,7 +32,7 @@ class AddArticle extends React.Component {
             <input
               type="text"
               name="url"
-              value={this.state.name}
+              value={this.state.url}
               onChange={this.handleChange}
               required
             />
