@@ -7,7 +7,6 @@ import SignUp from "./components/auth/SignUp";
 function App() {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(false);
-
   const ref = firebase.firestore().collection("articles");
   console.log("should be articles: ", ref);
 
