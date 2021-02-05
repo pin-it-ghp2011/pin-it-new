@@ -6,6 +6,8 @@ $ firebase login
 $ firebase init
 $ firebase deploy
 npm install firebase-functions@latest firebase-admin@latest --save
+firebase deploy --only hosting,storage
+
 
 npm install express
 npm install --save body-parser

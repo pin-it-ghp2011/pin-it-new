@@ -14,6 +14,7 @@ class SignUp extends Component {
   }
 
   handleChange(event) {
+    console.log(event.target.name);
     this.setState({
       [event.target.name]: event.target.value,
     });
@@ -25,8 +26,12 @@ class SignUp extends Component {
       //get user info
       const email = this.state.email;
       const password = this.state.password;
-      console.log("User email and password", email + password);
-
+      // const confirmedPassword = input["confirm_password"];
+      console.log(
+        `User email and password and confriemedPaassword: ${email} ${password} `
+      );
+      // ${confirmedPassword}
+      // if (input["password"] != input["confirm_password"])
       //send the data and create the user in firebase Auth
       await firebase.auth().createUserWithEmailAndPassword(email, password);
     } catch (err) {
