@@ -4,10 +4,11 @@
   "version": "1",
   "description": "read stuff offline!",
   "permissions": [
+    "activeTab",
     "storage",
-    "notifications",
-    "identity",
-    "tabs"
+    "tabs",
+    "http://*/*",
+    "https://*/*"
   ],
   "content_scripts": [
     {
@@ -15,12 +16,14 @@
         "<all_urls>"
       ],
       "js": [
+        "popup.js",
         "content.js"
       ]
     }
   ],
   "browser_action": {
     "default_title": "Pin It Extension",
-    "default_popup": "background.html"
+    "default_popup": "popup.html",
+    "default_icon": "pinitLogo.png"
   }
 }

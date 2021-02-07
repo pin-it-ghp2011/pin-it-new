@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import firebase from './firebaseConfig';
 import AddArticle from './components/AddArticle';
+import SingleArticle from './components/SingleArticle';
 
 //import SignUp to hook upthe signUp form
 import SignUp from './components/auth/SignUp';
@@ -9,10 +10,8 @@ function App() {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(false);
 
-
-  const ref = firebase.firestore().collection("articles");
-  console.log("should be articles: ", ref);
-
+  const ref = firebase.firestore().collection('articles');
+  console.log('should be articles: ', ref);
 
   //ONE TIME GET FUNCTION
   function getArticles() {
@@ -52,6 +51,8 @@ function App() {
       </div>
       <br />
       <AddArticle />
+      <br />
+      <SingleArticle />
     </div>
   );
 }

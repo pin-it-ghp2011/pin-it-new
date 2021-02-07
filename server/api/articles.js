@@ -1,11 +1,10 @@
-const router = require("express").Router();
-const { db, articlesCollection, webAPI } = require("../index");
+const router = require('express').Router();
+//const { db, articlesCollection, webAPI } = require("../index");
 
 // import database stuff here
 
 // we need to consider user here
-router.get("/", async (req, res, next) => {
-
+router.get('/', async (req, res, next) => {
   // try {
   //   console.log("EXPECTED BODY: ",req.body)
   //   const articles = {
@@ -19,5 +18,5 @@ router.get("/", async (req, res, next) => {
   //   next(error);
   // }
 
-  res.send("hello")
+  res.send('hello');
 });

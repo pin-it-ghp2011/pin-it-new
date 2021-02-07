@@ -1,4 +1,5 @@
 import React from 'react';
+import firebase from '../firebaseConfig';
 
 class AddArticle extends React.Component {
   constructor(props) {
@@ -14,11 +15,13 @@ class AddArticle extends React.Component {
       [event.target.name]: event.target.value,
     });
   }
-  handleSubmit(event) {
+  async handleSubmit(event) {
     event.preventDefault();
+    const db = firebase.firestore();
     const url = this.state.url;
+
     console.log('in add article component-url:', url);
-    // DB CALL GOES HERE?
+    await db.collection('articles').add({ url: url });
     this.setState({
       url: '',
     });

@@ -1,9 +1,9 @@
 //import libraries
-const functions = require("firebase-functions");
-const admin = require("firebase-admin");
-const express = require("express");
-const bodyParser = require("body-parser");
-const path = require("path");
+const functions = require('firebase-functions');
+const admin = require('firebase-admin');
+const express = require('express');
+const bodyParser = require('body-parser');
+const path = require('path');
 
 //initialize firebase inorder to access its services
 admin.initializeApp(functions.config().firebase);
@@ -16,22 +16,39 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, "../public")));
-app.use("/api", require("./api"));
+app.use(express.static(path.join(__dirname, '../public')));
+app.use('/api', require('../functions'));
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../public/index.html"));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/index.html'));
 }); // Send index.html for any other requests
 
 // error handling middleware
 app.use((err, req, res, next) => {
   // if (process.env.NODE_ENV !== 'test') console.error(err.stack)
-  res.status(err.status || 500).send(err.message || "Internal server error");
+  res.status(err.status || 500).send(err.message || 'Internal server error');
 });
 
 //initialize the database and the collection
 export const db = admin.firestore();
-export const articlesCollection = "articles";
+export const articlesCollection = 'articles';
 
 //define google cloud function name
 export const webApi = functions.https.onRequest(app);
+
+// const express = require('express');
+// const bodyParser = require('body-parser');
+// const cors = require('cors');
+// const app = express();
+
+// app.use(cors({ origin: true }));
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: false }));
+
+// app.use('/api', require('./api'));
+
+// app.get('*', (req, res) =>
+//   res.status(404).json({ success: false, data: 'Endpoint not found' })
+// );
+
+// module.exports = app;
